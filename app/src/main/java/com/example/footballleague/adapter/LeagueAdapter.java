@@ -21,7 +21,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     private Context context;
     private List<Competition> competitions;
     private Long leagueId;
-    private Long id;
+
 
 
     public LeagueAdapter(Context context , List<Competition> competitions) {
@@ -40,16 +40,16 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     @Override
     public void onBindViewHolder(@NonNull LeagueViewHolder holder, int position) {
 
-        for (int i = 0; i < competitions.size(); i++) {
+
             String area = competitions.get(position).getArea().getName();
             String name = competitions.get(position).getName();
-            leagueId = competitions.get(position).getId();
-            id = competitions.get(position).getArea().getId();
+          long  leagueId = competitions.get(position).getId();
+        final long    id = competitions.get(position).getArea().getId();
 
 
             holder.longLeagueName.setText(area + " (" +name +  " ) ");
 
-        }
+
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
