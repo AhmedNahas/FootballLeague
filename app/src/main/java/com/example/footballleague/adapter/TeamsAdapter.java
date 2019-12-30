@@ -2,13 +2,16 @@ package com.example.footballleague.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +21,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.Target;
 import com.example.footballleague.MainActivity;
 import com.example.footballleague.R;
+import com.example.footballleague.TeamInformation;
 import com.example.footballleague.teamsModel.Team;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 
@@ -41,9 +45,9 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TeamsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TeamsViewHolder holder, final int position) {
 
-        for (int i = 0; i < teams.size(); i++) {
+
             String crestUrl = teams.get(position).getCrestUrl();
             if (crestUrl==null){
 
@@ -54,10 +58,26 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
                 holder.teamLongName.setText(longName);
                 String shortName = teams.get(position).getShortName();
                 holder.teamShortName.setText(shortName);
-                Long id1 = teams.get(position).getId();
+
+
 
             }
-        }
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Long id = teams.get(position).getId();
+                String address = teams.get(position).getAddress();
+                String phone = teams.get(position).getPhone();
+                String website = teams.get(position).getWebsite();
+
+                Intent intent = new Intent(context, TeamInformation.class);
+                intent.putExtra("id", id);
+                intent.putExtra("address", address);
+                intent.putExtra("phone", phone);
+                intent.putExtra("website", website);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -73,6 +93,7 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
     public class TeamsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView teamImage;
         TextView teamShortName , teamLongName;
+        RelativeLayout parent;
         private onTeamClickListener onTeamClickListener;
         public TeamsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +101,7 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
             teamImage=itemView.findViewById(R.id.team_image);
             teamShortName=itemView.findViewById(R.id.team_short_name);
             teamLongName=itemView.findViewById(R.id.team_long_name);
+            parent=itemView.findViewById(R.id.parent_team);
             this.onTeamClickListener = onTeamClickListener;
             itemView.setOnClickListener(this);
         }
@@ -87,6 +109,7 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
         @Override
         public void onClick(View v) {
 
+            onTeamClickListener.onRowClick(getAdapterPosition());
         }
     }
 }
