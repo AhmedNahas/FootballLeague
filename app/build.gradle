@@ -37,4 +37,5 @@ dependencies {
 
     implementation 'com.github.corouteam:GlideToVectorYou:v2.0.0'
 
+    implementation 'com.pixplicity.sharp:library:1.1.0'
 }

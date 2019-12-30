@@ -22,6 +22,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.footballleague.MainActivity;
 import com.example.footballleague.R;
 import com.example.footballleague.TeamInformation;
+import com.example.footballleague.helper.Utils;
 import com.example.footballleague.teamsModel.Team;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 
@@ -45,21 +46,29 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TeamsViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull TeamsViewHolder holder, int position) {
+
+
+
+
+
+        try {
 
 
             String crestUrl = teams.get(position).getCrestUrl();
-            if (crestUrl==null){
 
 //                Glide.with(context).load(R.drawable.ic_do_not_disturb_black_24dp).into(holder.teamImage);
-            }else {
+
 //              Glide.with(context).load(crestUrl).into(holder.teamImage);
-                String longName = teams.get(position).getName();
-                holder.teamLongName.setText(longName);
-                String shortName = teams.get(position).getShortName();
-                holder.teamShortName.setText(shortName);
+            String longName = teams.get(position).getName();
+            holder.teamLongName.setText(longName);
+            String shortName = teams.get(position).getShortName();
+            holder.teamShortName.setText(shortName);
+            Long id1 = teams.get(position).getId();
+            Utils.fetchSvg(context, crestUrl, holder.teamImage);
+        }catch (Exception e){
 
-
+        }
 
             }
         holder.parent.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +88,9 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
             }
         });
 
-    }
+        }
+
+
 
     @Override
     public int getItemCount() {
@@ -109,7 +120,6 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
         @Override
         public void onClick(View v) {
 
-            onTeamClickListener.onRowClick(getAdapterPosition());
         }
     }
 }
