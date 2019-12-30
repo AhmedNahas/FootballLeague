@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/row_shape"
+    android:layout_margin="8dp">
+
+    <ImageView
+        android:id="@+id/team_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/row_shape"
+        android:layout_margin="10dp"/>
+    <LinearLayout
+        android:layout_toRightOf="@id/team_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/team_long_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/team_short_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+</RelativeLayout>
