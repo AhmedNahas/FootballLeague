@@ -3,8 +3,10 @@ package com.example.footballleague.leagueModel;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+
 @SuppressWarnings("unused")
-public class Competition {
+public class Competition{
 
     @SerializedName("area")
     private Area mArea;

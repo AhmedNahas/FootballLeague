@@ -36,7 +36,8 @@ public class Utils {
             httpClient.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    target.setImageDrawable(context.getDrawable(R.drawable.ic_launcher_foreground));
+                    
+                    target.setImageDrawable(context.getDrawable(R.drawable.not));
                 }
 
                 @Override

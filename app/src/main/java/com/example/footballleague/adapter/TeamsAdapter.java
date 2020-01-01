@@ -24,14 +24,12 @@ import com.example.footballleague.R;
 import com.example.footballleague.TeamInformation;
 import com.example.footballleague.helper.Utils;
 import com.example.footballleague.teamsModel.Team;
-import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 
 import java.util.List;
 
 public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHolder> {
     private Context context;
     private List<Team> teams;
-    private Activity activity;
 
     public TeamsAdapter(Context context, List<Team> teams) {
         this.context = context;
@@ -46,44 +44,47 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TeamsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TeamsViewHolder holder, final int position) {
 
-
-
+        final Long id = teams.get(position).getId();
+        final String address = teams.get(position).getAddress();
+        final String phone = teams.get(position).getPhone();
+        final String website = teams.get(position).getWebsite();
+        final String shortName = teams.get(position).getShortName();
+        final String longName = teams.get(position).getName();
+        final String crestUrl = teams.get(position).getCrestUrl();
 
 
         try {
 
-
-            String crestUrl = teams.get(position).getCrestUrl();
-
-//                Glide.with(context).load(R.drawable.ic_do_not_disturb_black_24dp).into(holder.teamImage);
-
-//              Glide.with(context).load(crestUrl).into(holder.teamImage);
-            String longName = teams.get(position).getName();
             holder.teamLongName.setText(longName);
-            String shortName = teams.get(position).getShortName();
             holder.teamShortName.setText(shortName);
             Long id1 = teams.get(position).getId();
-            Utils.fetchSvg(context, crestUrl, holder.teamImage);
+            if (!crestUrl.endsWith("svg")){
+                Glide.with(context).load(crestUrl).into(holder.teamImage);
+
+            }else {
+                Utils.fetchSvg(context, crestUrl, holder.teamImage);
+
+            }
         }catch (Exception e){
 
         }
 
-            }
+
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Long id = teams.get(position).getId();
-                String address = teams.get(position).getAddress();
-                String phone = teams.get(position).getPhone();
-                String website = teams.get(position).getWebsite();
+
 
                 Intent intent = new Intent(context, TeamInformation.class);
                 intent.putExtra("id", id);
                 intent.putExtra("address", address);
                 intent.putExtra("phone", phone);
                 intent.putExtra("website", website);
+                intent.putExtra("image",crestUrl);
+                intent.putExtra("name",longName);
+
                 context.startActivity(intent);
             }
         });
@@ -119,6 +120,8 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
 
         @Override
         public void onClick(View v) {
+
+            onTeamClickListener.onRowClick(getAdapterPosition());
 
         }
     }

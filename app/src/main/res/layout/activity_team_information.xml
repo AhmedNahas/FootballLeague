@@ -4,35 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeamInformation">
+    tools:context=".TeamInformation"
+    android:background="@color/colorApp">
 
     <ImageView
         android:id="@+id/team_logo"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/row_shape"/>
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/row_shape"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/club_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/team_logo"
+        android:textColor="@color/colorWhite"/>
     <LinearLayout
         android:id="@+id/linear"
-        android:layout_below="@+id/team_logo"
+        android:layout_below="@+id/club_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/team_info_shape"
+        android:layout_margin="5dp">
 
         <TextView
             android:id="@+id/team_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="4dp"/>
         <TextView
             android:id="@+id/team_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="4dp"/>
         <TextView
             android:id="@+id/team_website"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="4dp"/>
 
     </LinearLayout>
 
@@ -41,6 +60,8 @@
         android:layout_margin="5dp"
         android:layout_below="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:background="@drawable/rv_shape"/>
 
 </RelativeLayout>

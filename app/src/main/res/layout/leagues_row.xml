@@ -4,11 +4,24 @@
     android:layout_height="wrap_content">
 
 
-<RelativeLayout
+<LinearLayout
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/row_shape"
+    android:layout_marginTop="5dp">
 
+    <TextView
+        android:id="@+id/short_league_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:gravity="center"/>
     <TextView
         android:id="@+id/long_league_name"
         android:layout_width="wrap_content"
@@ -16,33 +29,12 @@
         android:layout_margin="5dp"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="15sp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/long_league_name">
-
-        <TextView
-            android:id="@+id/teams"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            />
-        <TextView
-            android:id="@+id/matches"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_toRightOf="@+id/teams" />
-
-    </LinearLayout>
+        android:textSize="15sp"
+        android:gravity="center"/>
 
 
 
-</RelativeLayout>
+</LinearLayout>
 
 
 
