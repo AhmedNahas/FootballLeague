@@ -5,9 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.footballleague.Service.RetrofitClient;
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView leagueRv;
     private RealmConfiguration realmConfiguration;
     private Realm realm;
+    private TextView notAvailable ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         leagueRv=findViewById(R.id.leagues_rv);
+        notAvailable=findViewById(R.id.unavailable);
 //        Realm.init(this);
 //        realmConfiguration = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
 //        Realm.setDefaultConfiguration(realmConfiguration);
@@ -59,8 +66,15 @@ public class MainActivity extends AppCompatActivity {
 //            leagueRv.setAdapter(leagueAdapter);
 //
 //        }
+        if (isNetworkAvailable()){
+            notAvailable.setVisibility(View.GONE);
+            loadLeagues();
 
-        loadLeagues();
+        }else{
+            notAvailable.setVisibility(View.VISIBLE);
+
+        }
+
 
 
     }
@@ -92,5 +106,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

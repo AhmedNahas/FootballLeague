@@ -12,6 +12,13 @@
         android:layout_height="wrap_content"
         android:padding="3dp"
         android:background="@drawable/rv_shape"/>
+    <TextView
+        android:id="@+id/unavailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please check your network connection"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorGrey"/>
 
 
 </RelativeLayout>

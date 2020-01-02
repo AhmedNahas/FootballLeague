@@ -51,7 +51,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     @Override
     public void onBindViewHolder(@NonNull LeagueViewHolder holder, int position) {
 
-        if (isNetworkAvailable()) {
+
             String area = competitions.get(position).getArea().getName();
             String name = competitions.get(position).getName();
             id = competitions.get(position).getArea().getId();
@@ -61,10 +61,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
             holder.shortLeagueName.setText(area);
 
 
-        }else{
-            Toast.makeText(context, "Internet not Available", Toast.LENGTH_SHORT).show();
 
-        }
 
 
 
@@ -82,11 +79,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     }
 
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
+
 
     @Override
     public int getItemCount() {
@@ -99,7 +92,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     }
 
     public class LeagueViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView longLeagueName , shortLeagueName;
+        private TextView longLeagueName , shortLeagueName , notAvailable;
         private LinearLayout parent;
         private onRowClickListener onRowClickListener;
         public LeagueViewHolder(@NonNull View itemView) {
@@ -108,6 +101,8 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
             longLeagueName=itemView.findViewById(R.id.long_league_name);
             shortLeagueName=itemView.findViewById(R.id.short_league_name);
             parent=itemView.findViewById(R.id.parent_layout);
+            notAvailable=itemView.findViewById(R.id.unavailable);
+
             this.onRowClickListener= onRowClickListener;
             itemView.setOnClickListener(this);
         }
@@ -120,3 +115,4 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
         }
     }
 }
+
