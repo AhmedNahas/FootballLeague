@@ -5,8 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +29,15 @@ import com.example.footballleague.dbHelper.LeagueContract;
 import com.example.footballleague.dbHelper.LeagueHelper;
 import com.example.footballleague.leagueModel.Competition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>{
     private Context context;
     private List<Competition> competitions;
+    private List<Competition> comp;
+    String searchText ="";
 
     private Long id;
 
@@ -57,8 +65,26 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
             id = competitions.get(position).getArea().getId();
 
 
-            holder.longLeagueName.setText(name);
-            holder.shortLeagueName.setText(area);
+            holder.longLeagueName.setText(Html.fromHtml(area));
+        int length = searchText.length();
+
+        if (length>0){
+                int index = area.indexOf(searchText);
+
+
+                    SpannableStringBuilder sb = new SpannableStringBuilder(area);
+                    ForegroundColorSpan fcs = new ForegroundColorSpan(Color.RED);
+                    sb.setSpan(fcs,0,length, Spannable.SPAN_MARK_MARK);
+//                    index = area.indexOf(searchText,index+1);
+
+                    holder.shortLeagueName.setText(sb);
+
+
+
+            }else {
+                holder.shortLeagueName.setText(Html.fromHtml(area));
+
+            }
 
 
 
@@ -113,6 +139,12 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
             onRowClickListener.onRowClick(getAdapterPosition());
 
         }
+    }
+    public void setFilter(List<Competition> countryModels,String searchText) {
+        comp = new ArrayList<>();
+        comp.addAll(countryModels);
+        this.searchText = searchText;
+        notifyDataSetChanged();
     }
 }
 

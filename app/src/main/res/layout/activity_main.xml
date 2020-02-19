@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/leagues_rv"
+    <data>
+
+        <variable
+            name="main"
+            type="com.example.footballleague.MainActivity" />
+
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:background="@drawable/rv_shape"/>
-    <TextView
-        android:id="@+id/unavailable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please check your network connection"
-        android:layout_centerInParent="true"
-        android:textColor="@color/colorGrey"/>
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_below="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@{main.names}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/leagues_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_below="@+id/spinner"
+            android:background="@drawable/rv_shape" />
+
+        <TextView
+            android:id="@+id/unavailable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please check your network connection"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorGrey"
+            android:visibility="gone"/>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>
